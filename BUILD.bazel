@@ -24,9 +24,7 @@ filegroup(
         "*.js",
         "*.json",
         "*.d.ts",
-    ]] + [
-        "node_modules/http-server/**",
-    ]),
+    ]]),
 )
 
 ANGULAR_TESTING = [

@@ -72,3 +72,15 @@ local_repository(
     name = "rxjs",
     path = "node_modules/rxjs/src",
 )
+
+####################################
+http_archive(
+    name = "io_bazel_rules_appengine",
+    sha256 = "d1fbc9a48332cc00b56d66751b5eb911ac9a88e820af7a2316a9b5ed4ee46d0b",
+    strip_prefix = "rules_appengine-0.0.7",
+    url = "https://github.com/bazelbuild/rules_appengine/archive/0.0.7.tar.gz",
+)
+
+load("@io_bazel_rules_appengine//appengine:appengine.bzl", "appengine_repositories")
+
+appengine_repositories()

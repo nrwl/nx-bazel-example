@@ -1,0 +1,57 @@
+load("@angular//:index.bzl", "ng_module")
+load("@build_bazel_rules_typescript//:defs.bzl", "ts_devserver")
+
+package(default_visibility = ["//visibility:public"])
+
+ng_module(
+    name = "src",
+    srcs = glob(["main.ts"]),
+    deps = [
+        "//apps/car-list/src/app",
+        "@rxjs",
+    ],
+)
+
+# Needed because the devserver only loads static files that appear under this
+# package.
+genrule(
+    name = "zone.js",
+    srcs = ["//:node_modules/zone.js/dist/zone.min.js"],
+    outs = ["zone.min.js"],
+    cmd = "cp $< $@",
+)
+
+STATIC_FILES = [
+    "favicon.ico",
+    "index.html",
+    "styles.css",
+    ":zone.js",
+]
+
+ts_devserver(
+    name = "devserver",
+    data = ["//apps/car-list/src/assets"],
+    entry_module = "cars/apps/car-list/src/main",
+    scripts = ["//:angular_bundles"],
+    serving_path = "/bundle.min.js",
+    static_files = STATIC_FILES,
+    deps = [":src"],
+)
+
+load("@build_bazel_rules_nodejs//:defs.bzl", "rollup_bundle", "nodejs_binary")
+
+rollup_bundle(
+    name = "bundle",
+    entry_point = "cars/apps/car-list/src/main",
+    deps = [":src"],
+)
+
+nodejs_binary(
+    name = "prodserver",
+    args = ["./apps/car-list/src"],
+    data = STATIC_FILES + [
+        ":bundle",
+        "//apps/car-list/src/assets",
+    ],
+    entry_point = "http-server/bin/http-server",
+)
