@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 
 bazel-out
+yarn-error.log
