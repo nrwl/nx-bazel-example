@@ -30,7 +30,10 @@ STATIC_FILES = [
 
 ts_devserver(
     name = "devserver",
-    data = ["//apps/car-list/src/assets"],
+    data = [
+        "//apps/car-list/src/assets",
+        "//backend",
+    ],
     entry_module = "cars/apps/car-list/src/main",
     scripts = ["//:angular_bundles"],
     serving_path = "/bundle.min.js",
