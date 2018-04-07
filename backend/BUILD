@@ -25,6 +25,8 @@ java_binary(
     srcs = glob(["src/**/*.java"]),
     main_class = "does.not.exist",
     deps = [
+        "//libs/api/src:car_java_proto",
         "@io_bazel_rules_appengine//appengine:javax.servlet.api",
+        "@protobuf_java_format//jar",
     ],
 )

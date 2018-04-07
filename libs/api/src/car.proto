@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "nx_bazel_example.api";
+
+message Car {
+  string make = 1;
+  string model = 2;
+  int32 year = 3;
+}
+
+message GetCarsResponse {
+  repeated Car cars = 1;
+}
