@@ -14,6 +14,7 @@ ng_module(
         "app.component.html",
     ],
     deps = [
+        "//libs/api/src:car_ts_proto",
         "@rxjs",
     ],
 )
@@ -35,4 +36,4 @@ ts_web_test(
         "//:angular_bundles",
         "//:angular_test_bundles",
     ],
-)    
+)
