@@ -10,5 +10,6 @@ Requirements:
 
 See this blog post for more details: https://blog.nrwl.io/introduction-to-nrwl-bazel-schematics-c391911a5e9f
 
-VM Instructions
+VM Instructions:
+
 Alternatively you can load the project through an in-browser VM from https://rhyme.com/go/bazel
