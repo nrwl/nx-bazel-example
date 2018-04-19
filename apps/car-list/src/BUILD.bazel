@@ -21,11 +21,19 @@ genrule(
     cmd = "cp $< $@",
 )
 
+genrule(
+    name = "protobuf.js",
+    srcs = ["//tools/protobufjs:node_modules/protobufjs/dist/minimal/protobuf.min.js"],
+    outs = ["protobuf.min.js"],
+    cmd = "cp $< $@",
+)
+
 STATIC_FILES = [
     "favicon.ico",
     "index.html",
     "styles.css",
     ":zone.js",
+    ":protobuf.js",
 ]
 
 ts_devserver(
@@ -35,26 +43,8 @@ ts_devserver(
         "//backend",
     ],
     entry_module = "cars/apps/car-list/src/main",
-    scripts = ["//:angular_bundles"],
+    scripts = [":require.config.js", "//:angular_bundles"],
     serving_path = "/bundle.min.js",
     static_files = STATIC_FILES,
     deps = [":src"],
-)
-
-load("@build_bazel_rules_nodejs//:defs.bzl", "rollup_bundle", "nodejs_binary")
-
-rollup_bundle(
-    name = "bundle",
-    entry_point = "cars/apps/car-list/src/main",
-    deps = [":src"],
-)
-
-nodejs_binary(
-    name = "prodserver",
-    args = ["./apps/car-list/src"],
-    data = STATIC_FILES + [
-        ":bundle",
-        "//apps/car-list/src/assets",
-    ],
-    entry_point = "http-server/bin/http-server",
 )

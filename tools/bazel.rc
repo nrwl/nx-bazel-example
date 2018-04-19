@@ -17,3 +17,7 @@ test --test_output=errors
 build:ci --local_resources=3072,2.0,1.0
 
 build:ci --noshow_progress
+
+# build --experimental_repository_cache=/.bazel_cache/
+# test --experimental_repository_cache=/.bazel_cache/
+# run --experimental_repository_cache=/.bazel_cache/

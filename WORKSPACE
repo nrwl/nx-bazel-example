@@ -38,14 +38,20 @@ http_archive(
 # Fetch and install the NodeJS rules
 http_archive(
     name = "build_bazel_rules_nodejs",
-    sha256 = "e9bc013417272b17f302dc169ad597f05561bb277451f010043f4da493417607",
-    strip_prefix = "rules_nodejs-0.4.1",
-    url = "https://github.com/bazelbuild/rules_nodejs/archive/0.4.1.zip",
+    url = "https://github.com/bazelbuild/rules_nodejs/archive/0.7.0.zip",
+    strip_prefix = "rules_nodejs-0.7.0",
+    sha256 = "d0cecf6b149d431ee8349f683d1db6a2a881ee81d8066a66c1b112a4b02748de",
 )
 
-load("@build_bazel_rules_nodejs//:defs.bzl", "node_repositories")
+load("@build_bazel_rules_nodejs//:defs.bzl", "node_repositories", "yarn_install")
 
 node_repositories(package_json = ["//:package.json"])
+
+yarn_install(
+    name = "protobufs_compiletime_deps",
+    package_json = "//tools/protobufjs:package.json",
+    yarn_lock = "//tools/protobufjs:yarn.lock",
+)
 
 ####################################
 # Fetch and install the Sass rules

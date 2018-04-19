@@ -6,7 +6,10 @@ import 'rxjs/add/operator/retryWhen';
 import {Component} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import {GetCarsResponse, Car} from '../../../../libs/api/src/car';
+import * as blah from 'cars/libs/api/src/car';
+
+console.log(blah);
+debugger;
 
 @Component({
   selector: 'app-root',
@@ -15,12 +18,13 @@ import {GetCarsResponse, Car} from '../../../../libs/api/src/car';
 })
 export class AppComponent {
   carServiceUrl = 'http://localhost:8080/cars';
-  cars: Observable<Array<Car>> = this.http
-    .get(this.carServiceUrl)
-    // Retry if the call fails since the server may be starting up
-    .retryWhen(errors => errors.delay(3000).take(3))
-    .map(res => res.json())
-    .map((getCardReponse: GetCarsResponse) => getCardReponse.cars);
+  cars: Observable<Array<blah.ICar>>;
+  // = this.http
+  //   .get(this.carServiceUrl)
+  //   // Retry if the call fails since the server may be starting up
+  //   .retryWhen(errors => errors.delay(3000).take(3))
+  //   .map(res => GetCarsResponse.encode(res.json()))
+  //   .map((getCarsReponse: GetCarsResponse) => getCarsReponse.cars);
 
   constructor(private http: Http) {}
 }
