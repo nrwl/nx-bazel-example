@@ -23,7 +23,7 @@ genrule(
 
 genrule(
     name = "protobuf.js",
-    srcs = ["//tools/protobufjs:node_modules/protobufjs/dist/minimal/protobuf.min.js"],
+    srcs = ["@protobufs_compiletime_deps//:node_modules/protobufjs/dist/minimal/protobuf.min.js"],
     outs = ["protobuf.min.js"],
     cmd = "cp $< $@",
 )
