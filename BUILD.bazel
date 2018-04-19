@@ -23,6 +23,7 @@ filegroup(
         "@angular/router",
         "@nrwl",
         "@ngrx",
+        "long",
         "tsickle",
         "tsutils",
         "typescript",

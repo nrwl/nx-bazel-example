@@ -8,5 +8,5 @@
 <h1>Luxury Cars - loaded from Java API</h1>
 
 <ul>
-  <li *ngFor="let car of cars | async">{{car.make}} - {{car.model}} - {{car.year}}</li>
+  <li *ngFor="let carsDisplayString of carsDisplayStrings | async">{{ carsDisplayString }}</li>
 </ul>

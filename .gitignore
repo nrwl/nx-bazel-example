@@ -7,6 +7,9 @@
 
 # dependencies
 /node_modules
+tools/protobufjs/node_modules
+tools/protobufjs/yarn-error.log
+yarn-error.log
 
 # IDEs and editors
 /.idea
@@ -16,6 +19,8 @@
 *.launch
 .settings/
 *.sublime-workspace
+*.js
+*.map
 
 # IDE - VSCode
 .vscode/*

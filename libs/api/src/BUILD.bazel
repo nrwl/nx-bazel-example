@@ -1,12 +1,10 @@
 package(default_visibility = ["//visibility:public"])
 
-load("@build_bazel_rules_typescript//:defs.bzl", "ts_library", "ts_web_test")
+load("//tools/protobufjs:ts_proto_library.bzl", "ts_proto_library")
 
-ts_library(
+ts_proto_library(
     name = "car_ts_proto",
-    # Temporary workaround until https://github.com/bazelbuild/rules_typescript/issues/61 is resolved.
-    srcs = ["car.d.ts"],
-    # deps = ":car_proto",
+    srcs = ["car.proto"],
 )
 
 java_proto_library(
