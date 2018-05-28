@@ -18,8 +18,7 @@ public class CarsServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    setAccessControlHeaders(response);
-
+   
     Car lotusElise = Car.newBuilder().setMake("Lotus").setModel("Elise").setYear(2018).build();
     Car hondaCivic = Car.newBuilder().setMake("Honda").setModel("Civic").setYear(2008).build();
 
@@ -30,15 +29,4 @@ public class CarsServlet extends HttpServlet {
     response.getWriter().print(jsonFormat.printToString(cars));
   }
 
-  @Override
-  protected void doOptions(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-      setAccessControlHeaders(response);
-      response.setStatus(HttpServletResponse.SC_OK);
-  }
-
-  private void setAccessControlHeaders(HttpServletResponse response) {
-    response.setHeader("Access-Control-Allow-Origin", "*");
-    response.setHeader("Access-Control-Allow-Methods", "GET");
-  }
 }

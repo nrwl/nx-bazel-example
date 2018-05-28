@@ -6,9 +6,30 @@ package(default_visibility = ["//visibility:public"])
 
 appengine_war(
     name = "backend",
-    data = [":webapp"],
+    data = [":webapp", ":zone.js", ":protobuf.js", ":long.js"],
     data_path = "webapp",
     jars = [":app_deploy.jar"],
+)
+
+genrule(
+    name = "zone.js",
+    srcs = ["//:node_modules/zone.js/dist/zone.min.js"],
+    outs = ["webapp/zone.min.js"],
+    cmd = "cp $< $@",
+)
+
+genrule(
+    name = "long.js",
+    srcs = ["//:node_modules/long/dist/long.js"],
+    outs = ["webapp/long.min.js"],
+    cmd = "cp $< $@",
+)
+
+genrule(
+    name = "protobuf.js",
+    srcs = ["@protobufs_compiletime_deps//:node_modules/protobufjs/dist/minimal/protobuf.min.js"],
+    outs = ["webapp/protobuf.min.js"],
+    cmd = "cp $< $@",
 )
 
 filegroup(
